@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="getData()">Get Data</button>
+<h1 id="data"></h1>
+<!-- <img id="productImg" src="" alt width="500"> -->
+<div id="productImgContainer" style="display: flex;">
+
+</div>
+    <script>
+       
+        async function getData(){
+            let url = "https://crud.teamrabbil.com/api/v1/ReadProduct";
+            let res = await fetch(url)
+            let resObj = await res.json()
+            document.getElementById('data').innerText = resObj.data.length
+            for(let i = 0; i < resObj.data.length; i++){
+                let imgContainer = document.getElementById("productImgContainer");
+                let img = document.createElement("img");
+                img.setAttribute("src",resObj.data[i].Img);
+                img.setAttribute("width","300px");
+                imgContainer.appendChild(img);
+        
+            }
+            alert(resObj.status)
+            
+
+        }
+ 
+    </script>
+</body>
+</html>
